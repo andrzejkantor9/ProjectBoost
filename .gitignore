@@ -70,3 +70,5 @@ crashlytics-build.properties
 #####################################################
 
 /.vscode
+/Assets/URP_and_bolt/Ludiq/
+/Assets/URP_and_bolt/Bolt_1_4_15_Source.zip
