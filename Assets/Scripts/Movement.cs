@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Movement : MonoBehaviour
@@ -7,6 +5,7 @@ public class Movement : MonoBehaviour
     private UnityEngine.InputSystem.Keyboard m_keyboard = null;
     
     [SerializeField] private Rigidbody m_rigidbody = null;
+    [SerializeField] private AudioSource m_audioSource = null;
     
     [SerializeField] private float m_ThrustPower = 1000f;
     [SerializeField] private float m_RotationSpeed = 100f;
@@ -25,6 +24,7 @@ public class Movement : MonoBehaviour
     private void Awake() 
     {
         UnityEngine.Assertions.Assert.IsNotNull(m_rigidbody, $"{this.GetType().ToString()} script, m_rigidbody = null!");
+        UnityEngine.Assertions.Assert.IsNotNull(m_audioSource, $"{this.GetType().ToString()} script, m_audioSource = null!");
         
         QualitySettings.vSyncCount = 0;
         Application.targetFrameRate = 300;
@@ -52,7 +52,22 @@ public class Movement : MonoBehaviour
     private void ProcessThrust()
     {
         if (m_keyboard.spaceKey.isPressed)
+        {
             m_rigidbody.AddRelativeForce(Vector3.up * m_ThrustPower * Time.deltaTime);
+            if(!m_audioSource.isPlaying)
+                m_audioSource.Play();
+        }            
+        else
+        {
+            if(m_audioSource.isPlaying)
+                m_audioSource.Stop();
+        }
+    }
+
+    private void OnDisable() 
+    {
+        if(m_audioSource.isPlaying)
+            m_audioSource.Stop();
     }
 
     private void ProcessRotation()
