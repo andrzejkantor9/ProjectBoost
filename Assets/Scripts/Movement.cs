@@ -26,17 +26,6 @@ public class Movement : MonoBehaviour
     //STATE
     private UnityEngine.InputSystem.Keyboard m_keyboard = null;
 
-#region debugVariables
-    private float updateInterval = 0.5f; //How often should the number update
-
-    float accum = 0.0f;
-    int frames = 0;
-    float timeleft;
-    float fps;
-
-    GUIStyle textStyle = new GUIStyle();
-#endregion
-
 #region LowLevelMethods
     private void AssertComponents()
     {
@@ -168,7 +157,7 @@ public class Movement : MonoBehaviour
 
     private void Start()
     {
-        SetupFpsCounter();
+        
     }
 
     void Update()
@@ -179,11 +168,7 @@ public class Movement : MonoBehaviour
             ProcessThrust();
             ProcessRotation();
 
-            ProcessMaximizeEditorPlayWindow();
         }
-
-        ProcessFpsCounter();
-        m_lastUpdateTime = Time.time;
     }
 
     private void OnDisable() 
@@ -195,51 +180,4 @@ public class Movement : MonoBehaviour
             particleObject.Stop();
         }
     }
-
-    #region debug
-
-    private void ProcessMaximizeEditorPlayWindow()
-    {
-#if UNITY_EDITOR
-        if (UnityEditor.EditorApplication.isPlaying && m_keyboard.f11Key.wasPressedThisFrame)
-        {
-            UnityEditor.EditorWindow.focusedWindow.maximized = !UnityEditor.EditorWindow.focusedWindow.maximized;
-        }
-#endif
-    }
-
-    private void ProcessFpsCounter()
-    {
-        timeleft -= Time.deltaTime;
-        accum += Time.timeScale / Time.deltaTime;
-        ++frames;
-
-        // Interval ended - update GUI text and start new interval
-        if (timeleft <= 0.0)
-        {
-            // display two fractional digits (f2 format)
-            fps = (accum / frames);
-            timeleft = updateInterval;
-            accum = 0.0f;
-            frames = 0;
-        }
-    }
-
-    private void SetupFpsCounter()
-    {
-        timeleft = updateInterval;
-
-        textStyle.fontStyle = FontStyle.Bold;
-        textStyle.normal.textColor = Color.white;
-    }
-
-    float m_lastUpdateTime = 0f;
-    void OnGUI()
-    {
-        //Display the fps and round to 2 decimals
-        GUI.Label(new Rect(5, 5, 100, 25), fps.ToString("F2") + "FPS", textStyle);
-
-        GUI.Label(new Rect(5, 100, 100, 25), m_lastUpdateTime.ToString("F2") + "- last update", textStyle);        
-    }
-#endregion
 }

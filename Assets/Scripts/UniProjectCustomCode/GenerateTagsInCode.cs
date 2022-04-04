@@ -5,16 +5,16 @@ using UnityEditor;
 using UnityEditor.SceneManagement;
 #endif
 
-//search all not loaded scenes (all in project)
-//or on validate save
-//search objects recursively
-//list unsued tags as well
-//create enum variable
+//todo - search all not loaded scenes (all in project)
+//todo - or on validate save
+//todo - search objects recursively
+//todo - list unsued tags as well
+//todo - create enum variable
 
-//OPTIONS
-//search one by one scene, or all at once
-//toggle debug for not found game objects
-//make it work when new tag is added, not on menu item call
+//EXTRA FEATURES
+//todo - search one by one scene, or all at once
+//todo - toggle debug for not found game objects
+//todo - make it work when new tag is added, not on menu item call
 
 public class GenerateTagsInCode : MonoBehaviour
 {

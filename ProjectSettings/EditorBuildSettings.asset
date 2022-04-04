@@ -6,9 +6,18 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Scenes/Timing.unity
+    guid: 4ff9cbf5809e2b443bdb689bb46bd842
+  - enabled: 1
+    path: Assets/Scenes/FlyUnder.unity
+    guid: 350f557f72c2d84418305d71f37978c9
+  - enabled: 1
     path: Assets/Scenes/FlyOver.unity
     guid: d1c3109bdb54ad54c8a2b2838528e640
   - enabled: 1
-    path: Assets/Scenes/FlyUnder.unity
-    guid: 28f6b800c4a24e44aae59ef57ee3132b
+    path: Assets/Scenes/SquezeIn.unity
+    guid: cc57cf7af51dc794f9f06eeb8036e2be
+  - enabled: 1
+    path: Assets/Scenes/GoBack.unity
+    guid: 5122aea6fedfe3d4fa913c3087d7f613
   m_configObjects: {}

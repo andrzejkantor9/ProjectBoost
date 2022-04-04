@@ -2,7 +2,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-//todo move collision sounds to collision handler
 public class CollisionHandler : MonoBehaviour
 {   
     [SerializeField] 
@@ -16,28 +15,32 @@ public class CollisionHandler : MonoBehaviour
 #region MidLevelMethods
     private void OnRocketCrashed()
     {
-        // if(GetComponent<Movement>().IsSceneLoading())
-        //     return;
+        Movement movement = GetComponent<Movement>();
+        if(!movement)
+            return;
 
-        GetComponent<Movement>().enabled = false;
-        GetComponent<Movement>().OnDeath();
+        movement.enabled = false;
+        movement.OnDeath();
         m_rocketParticles[1].Play();
-        // GameObject.Find("Explosion Particles").GetComponent<ParticleSystem>().Play();
 
         m_isSceneTransitioning = true;
+        //invokes are ugly, just for presentation
         Invoke("ReloadScene", m_sceneLoadDelay);
     }
 
     private void OnLandPadCollision()
-    {
-        // if(GetComponent<Movement>().IsSceneLoading())
-        //     return;
-            
-        GetComponent<Movement>().enabled = false;
-        GetComponent<Movement>().OnSceneFinish();
+    {            
+        Movement movement = GetComponent<Movement>();
+        if(!movement)
+            return;
+
+        movement.enabled = false;
+        movement.OnSceneFinish();
+
         m_rocketParticles[0].Play();
 
         m_isSceneTransitioning = true;
+        //invokes are ugly, just for presentation
         Invoke("LoadNextScene", m_sceneLoadDelay);
     }
 
