@@ -1,9 +1,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
+#if UNITY_EDITOR
 using UnityEditor.SceneManagement;
+#endif
 
 //search all not loaded scenes (all in project)
+//or on validate save
 //search objects recursively
 //list unsued tags as well
 //create enum variable
@@ -15,6 +18,7 @@ using UnityEditor.SceneManagement;
 
 public class GenerateTagsInCode : MonoBehaviour
 {
+#if UNITY_EDITOR
     [MenuItem("CustomTools/GenerateTagsInCode")]
     private static void GenerateTags()
     {
@@ -63,4 +67,5 @@ public class GenerateTagsInCode : MonoBehaviour
             Debug.Log($"tag: {item}");
         }
     }
+    #endif
 }
